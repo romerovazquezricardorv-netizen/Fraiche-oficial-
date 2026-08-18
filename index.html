@@ -14,6 +14,21 @@
   <title>FRAICHE — Ventas</title>
 
   <style>
+  /* Animación de entrada FRAICHE */
+body {
+  animation: fraicheEntrada 0.8s ease-out both;
+}
+
+@keyframes fraicheEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}  
     :root{
       --cream:#f6ece0;
       --cream2:#efe1cf;
