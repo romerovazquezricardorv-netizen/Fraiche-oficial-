@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6ece0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="FRAICHE">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <title>FRAICHE — Ventas</title>
+
+  <style>
+    :root{
+      --cream:#f6ece0;
+      --cream2:#efe1cf;
+      --paper:#fffaf4;
+      --ink:#2c2116;
+      --soft:#765f4d;
+      --rose:#c97b6d;
+      --amber:#a8632f;
+      --amber2:#c9884f;
+      --gold:#b08d57;
+      --line:rgba(111,78,55,.20);
+      --success:#66815c;
+      --shadow:0 8px 24px rgba(86,57,36,.08);
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;
+      padding:0;
+      background:var(--cream);
+      color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      padding-bottom:34px;
+    }
+
+    button{
+      font:inherit;
+      color:inherit;
+    }
+
+    .app{
+      width:min(100%,520px);
+      margin:auto;
+      padding:28px 18px 42px;
+    }
+
+    .eyebrow{
+      text-align:center;
+      letter-spacing:.30em;
+      font-size:11px;
+      color:#b78a76;
+      margin-bottom:8px;
+    }
+
+    .brand{
+      font-family:Georgia,"Times New Roman",serif;
+      text-align:center;
+      font-size:48px;
+      font-weight:400;
+      letter-spacing:.02em;
+      margin:0;
+    }
+
+    .date-nav{
+      display:grid;
+      grid-template-columns:48px 1fr 48px;
+      align-items:center;
+      margin:20px 0 10px;
+    }
+
+    .nav-btn{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.32);
+      font-size:25px;
+      color:var(--soft);
+    }
+
+    .date-center{
+      text-align:center;
+    }
+
+    .date-main{
+      font-size:17px;
+      font-weight:500;
+    }
+
+    .today{
+      margin-top:3px;
+      font-size:11px;
+      letter-spacing:.16em;
+      color:var(--rose);
+      text-transform:uppercase;
+    }
+
+    .hero{
+      text-align:center;
+      padding-top:2px;
+    }
+
+    .trophy-wrap{
+      width:180px;
+      height:210px;
+      margin:4px auto 0;
+      position:relative;
+    }
+
+    .trophy-wrap svg{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+
+    .amount{
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:48px;
+      color:var(--amber);
+      margin-top:4px;
+      line-height:1;
+    }
+
+    .goal-text{
+      margin-top:9px;
+      font-size:16px;
+    }
+
+    .remaining-pill{
+      display:inline-block;
+      margin-top:11px;
+      padding:8px 18px;
+      border-radius:999px;
+      background:#ead8c7;
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#765842;
+    }
+
+    .remaining-pill.done{
+      color:#41573b;
+      background:#dfe8d9;
+    }
+
+    .section{
+      margin-top:25px;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#b07f6c;
+      letter-spacing:.17em;
+      text-transform:uppercase;
+      font-size:13px;
+      margin-bottom:11px;
+    }
+
+    .section-title::after{
+      content:"";
+      height:1px;
+      flex:1;
+      background:var(--line);
+    }
+
+    .smart-card,
+    .summary-card,
+    .week-card,
+    .history-launch,
+    .count-card{
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:rgba(255,250,244,.58);
+      box-shadow:var(--shadow);
+    }
+
+    .smart-card{
+      padding:15px 16px;
+    }
+
+    .smart-label{
+      font-size:11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--rose);
+      margin-bottom:7px;
+    }
+
+    .smart-main{
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:18px;
+      line-height:1.35;
+    }
+
+    .smart-secondary{
+      margin-top:6px;
+      color:var(--soft);
+      font-size:13px;
+      line-height:1.4;
+    }
+
+    .products{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .product-btn{
+      position:relative;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.62);
+      border-radius:18px;
+      min-height:100px;
+      padding:16px 10px 13px;
+      box-shadow:0 4px 14px rgba(86,57,36,.05);
+      cursor:pointer;
+    }
+
+    .product-btn:active{
+      transform:scale(.985);
+    }
+
+    .plus{
+      position:absolute;
+      top:8px;
+      right:11px;
+      color:#b6876d;
+      font-size:20px;
+    }
+
+    .ml{
+      display:block;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:29px;
+      line-height:1;
+    }
+
+    .gain{
+      display:block;
+      color:var(--rose);
+      margin-top:7px;
+      font-size:16px;
+    }
+
+    .sales-list{
+      display:grid;
+      gap:8px;
+    }
+
+    .sale-row{
+      display:grid;
+      grid-template-columns:1fr auto auto;
+      gap:10px;
+      align-items:center;
+      padding:12px 13px;
+      border:1px solid var(--line);
+      border-radius:15px;
+      background:rgba(255,255,255,.43);
+    }
+
+    .sale-name{
+      font-size:14px;
+    }
+
+    .sale-value{
+      color:var(--amber);
+      font-weight:600;
+    }
+
+    .delete-sale{
+      width:31px;
+      height:31px;
+      border:0;
+      background:transparent;
+      color:#9f7f6d;
+      font-size:19px;
+    }
+
+    .empty{
+      color:#927966;
+      font-size:13px;
+      text-align:center;
+      padding:11px;
+    }
+
+    .summary-card{
+      padding:16px;
+    }
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px 10px;
+    }
+
+    .metric{
+      text-align:center;
+      padding:7px;
+    }
+
+    .metric-value{
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:26px;
+      color:var(--amber);
+    }
+
+    .metric-label{
+      margin-top:4px;
+      color:var(--soft);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    .split{
+      border-top:1px solid var(--line);
+      margin-top:11px;
+      padding-top:12px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      text-align:center;
+      font-size:13px;
+      color:var(--soft);
+    }
+
+    .split strong{
+      display:block;
+      color:var(--ink);
+      margin-top:3px;
+      font-size:17px;
+    }
+
+    .accordion-btn{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      border:1px solid var(--line);
+      border-radius:17px;
+      background:rgba(255,250,244,.58);
+      padding:14px 16px;
+      font-weight:600;
+    }
+
+    .count-card{
+      display:none;
+      margin-top:8px;
+      padding:15px;
+    }
+
+    .count-card.open{
+      display:block;
+    }
+
+    .count-group{
+      margin-bottom:14px;
+    }
+
+    .count-group:last-child{
+      margin-bottom:0;
+    }
+
+    .count-heading{
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:19px;
+      margin-bottom:9px;
+    }
+
+    .count-row{
+      display:grid;
+      grid-template-columns:64px 1fr 34px;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+      margin:8px 0;
+    }
+
+    .bar-track{
+      height:7px;
+      border-radius:10px;
+      background:#eadbce;
+      overflow:hidden;
+    }
+
+    .bar-fill{
+      height:100%;
+      width:0%;
+      border-radius:10px;
+      background:linear-gradient(90deg,var(--amber2),var(--rose));
+    }
+
+    .leader{
+      margin-top:13px;
+      padding-top:12px;
+      border-top:1px solid var(--line);
+      color:var(--soft);
+      font-size:13px;
+    }
+
+    .week-card{
+      padding:16px;
+    }
+
+    .week-bars{
+      height:125px;
+      display:grid;
+      grid-template-columns:repeat(6,1fr);
+      gap:8px;
+      align-items:end;
+      margin-bottom:14px;
+    }
+
+    .day-col{
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      align-items:center;
+      gap:6px;
+    }
+
+    .day-bar-area{
+      height:92px;
+      width:100%;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+    }
+
+    .day-bar{
+      width:24px;
+      min-height:4px;
+      border-radius:10px 10px 4px 4px;
+      background:linear-gradient(var(--amber2),var(--rose));
+    }
+
+    .day-name{
+      font-size:10px;
+      letter-spacing:.08em;
+      color:var(--soft);
+    }
+
+    .week-total{
+      text-align:center;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:25px;
+      color:var(--amber);
+    }
+
+    .week-sub{
+      text-align:center;
+      color:var(--soft);
+      font-size:13px;
+      margin-top:4px;
+    }
+
+    .trend{
+      text-align:center;
+      margin-top:9px;
+      font-size:12px;
+      color:var(--soft);
+    }
+
+    .history-launch{
+      width:100%;
+      padding:16px;
+      border:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      text-align:left;
+    }
+
+    .history-launch strong{
+      display:block;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:20px;
+    }
+
+    .history-launch span{
+      display:block;
+      margin-top:3px;
+      color:var(--soft);
+      font-size:12px;
+    }
+
+    .close-day{
+      width:100%;
+      border:1px solid var(--amber);
+      background:var(--amber);
+      color:#fffaf4;
+      border-radius:18px;
+      padding:15px 18px;
+      font-weight:600;
+      letter-spacing:.04em;
+    }
+
+    dialog{
+      width:min(calc(100% - 28px),480px);
+      border:0;
+      border-radius:24px;
+      background:var(--paper);
+      color:var(--ink);
+      padding:0;
+      box-shadow:0 20px 70px rgba(38,25,16,.28);
+    }
+
+    dialog::backdrop{
+      background:rgba(41,29,20,.38);
+      backdrop-filter:blur(3px);
+    }
+
+    .modal{
+      padding:20px;
+    }
+
+    .modal-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:15px;
+    }
+
+    .modal-title{
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:26px;
+    }
+
+    .modal-close{
+      border:0;
+      background:transparent;
+      font-size:24px;
+      color:var(--soft);
+    }
+
+    .tabs{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      margin-bottom:15px;
+    }
+
+    .tab{
+      border:0;
+      padding:10px;
+      background:transparent;
+      color:var(--soft);
+    }
+
+    .tab.active{
+      background:#ead8c7;
+      color:var(--ink);
+      font-weight:600;
+    }
+
+    .history-stats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+    }
+
+    .history-stat{
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius:14px;
+    }
+
+    .history-stat small{
+      display:block;
+      color:var(--soft);
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    .history-stat strong{
+      display:block;
+      margin-top:5px;
+      font-size:18px;
+    }
+
+    .closing-box{
+      text-align:center;
+    }
+
+    .closing-amount{
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:46px;
+      color:var(--amber);
+      margin:8px 0;
+    }
+
+    .closing-line{
+      margin:9px 0;
+      color:var(--soft);
+      line-height:1.45;
+    }
+
+    .tiny-note{
+      margin-top:15px;
+      font-size:11px;
+      color:#927966;
+      text-align:center;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <div class="eyebrow">VENTAS PUERTA A PUERTA</div>
+    <h1 class="brand">FRAICHE</h1>
+
+    <div class="date-nav">
+      <button class="nav-btn" id="prevDay" aria-label="Día anterior">‹</button>
+
+      <div class="date-center">
+        <div class="date-main" id="dateLabel"></div>
+        <div class="today" id="todayLabel"></div>
+      </div>
+
+      <button class="nav-btn" id="nextDay" aria-label="Día siguiente">›</button>
+    </div>
+
+    <section class="hero">
+      <div class="trophy-wrap">
+        <svg viewBox="0 0 220 260" role="img" aria-label="Progreso de meta">
+          <defs>
+            <clipPath id="trophyClip">
+              <path d="
+                M55 24
+                L165 24
+                Q165 55 188 55
+                L195 55
+                L195 108
+                Q194 151 167 177
+                L145 198
+                L145 216
+                L160 220
+                L160 242
+                L60 242
+                L60 220
+                L75 216
+                L75 198
+                L53 177
+                Q26 151 25 108
+                L25 55
+                L32 55
+                Q55 55 55 24
+                Z
+              "/>
+            </clipPath>
+
+            <linearGradient id="liquid" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#a8632f"/>
+              <stop offset="100%" stop-color="#c9884f"/>
+            </linearGradient>
+          </defs>
+
+          <g fill="none" stroke="#9c6d44" stroke-width="3.3" stroke-linejoin="round">
+            <path d="
+              M55 24
+              L165 24
+              Q165 55 188 55
+              L195 55
+              L195 108
+              Q194 151 167 177
+              L145 198
+              L145 216
+              L160 220
+              L160 242
+              L60 242
+              L60 220
+              L75 216
+              L75 198
+              L53 177
+              Q26 151 25 108
+              L25 55
+              L32 55
+              Q55 55 55 24
+              Z
+            "/>
+
+            <path d="M25 55 L10 55 L10 103 Q11 151 53 177"/>
+            <path d="M195 55 L210 55 L210 103 Q209 151 167 177"/>
+          </g>
+
+          <rect
+            id="trophyFill"
+            x="0"
+            y="260"
+            width="220"
+            height="0"
+            fill="url(#liquid)"
+            opacity=".76"
+            clip-path="url(#trophyClip)"
+          />
+        </svg>
+      </div>
+
+      <div class="amount" id="dailyAmount">$0</div>
+      <div class="goal-text">de tu meta de <strong>$333 al día</strong></div>
+      <div class="remaining-pill" id="remainingPill">FALTAN $333</div>
+    </section>
+
+    <section class="section">
+      <div class="smart-card">
+        <div class="smart-label">Meta inteligente</div>
+        <div class="smart-main" id="smartMain"></div>
+        <div class="smart-secondary" id="smartSecondary"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Nuevos</div>
+      <div class="products">
+        <button class="product-btn" data-type="Nuevo" data-size="120" data-value="167">
+          <span class="plus">+</span>
+          <span class="ml">120ml</span>
+          <span class="gain">+$167</span>
+        </button>
+
+        <button class="product-btn" data-type="Nuevo" data-size="60" data-value="93">
+          <span class="plus">+</span>
+          <span class="ml">60ml</span>
+          <span class="gain">+$93</span>
+        </button>
+
+        <button class="product-btn" data-type="Nuevo" data-size="30" data-value="55">
+          <span class="plus">+</span>
+          <span class="ml">30ml</span>
+          <span class="gain">+$55</span>
+        </button>
+
+        <button class="product-btn" data-type="Nuevo" data-size="16" data-value="31">
+          <span class="plus">+</span>
+          <span class="ml">16ml</span>
+          <span class="gain">+$31</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Rellenos</div>
+      <div class="products">
+        <button class="product-btn" data-type="Relleno" data-size="120" data-value="133">
+          <span class="plus">+</span>
+          <span class="ml">120ml</span>
+          <span class="gain">+$133</span>
+        </button>
+
+        <button class="product-btn" data-type="Relleno" data-size="60" data-value="66">
+          <span class="plus">+</span>
+          <span class="ml">60ml</span>
+          <span class="gain">+$66</span>
+        </button>
+
+        <button class="product-btn" data-type="Relleno" data-size="30" data-value="31">
+          <span class="plus">+</span>
+          <span class="ml">30ml</span>
+          <span class="gain">+$31</span>
+        </button>
+
+        <button class="product-btn" data-type="Relleno" data-size="16" data-value="16">
+          <span class="plus">+</span>
+          <span class="ml">16ml</span>
+          <span class="gain">+$16</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Ventas del día</div>
+      <div class="sales-list" id="salesList"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Resumen del día</div>
+
+      <div class="summary-card">
+        <div class="summary-grid">
+          <div class="metric">
+            <div class="metric-value" id="metricSales">0</div>
+            <div class="metric-label">Ventas</div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-value" id="metricTotal">$0</div>
+            <div class="metric-label">Ganancia</div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-value" id="metricTicket">$0</div>
+            <div class="metric-label">Ticket promedio</div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-value" id="metricTop">—</div>
+            <div class="metric-label">Más vendido</div>
+          </div>
+        </div>
+
+        <div class="split">
+          <div>
+            Nuevos
+            <strong id="newSplit">$0</strong>
+          </div>
+
+          <div>
+            Rellenos
+            <strong id="refillSplit">$0</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <button class="accordion-btn" id="countToggle">
+        <span>Conteo por producto</span>
+        <span id="countArrow">⌄</span>
+      </button>
+
+      <div class="count-card" id="countCard">
+        <div class="count-group">
+          <div class="count-heading">Nuevos</div>
+          <div id="newCounts"></div>
+        </div>
+
+        <div class="count-group">
+          <div class="count-heading">Rellenos</div>
+          <div id="refillCounts"></div>
+        </div>
+
+        <div class="leader" id="leaderText"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Semana</div>
+
+      <div class="week-card">
+        <div class="week-bars" id="weekBars"></div>
+        <div class="week-total" id="weekTotal">$0 de $2,000</div>
+        <div class="week-sub" id="weekRemaining">Faltan $2,000</div>
+        <div class="trend" id="weekTrend"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <button class="history-launch" id="openHistory">
+        <div>
+          <strong>Historial y tendencias</strong>
+          <span>Consulta tus resultados por día, semana y mes.</span>
+        </div>
+        <div>›</div>
+      </button>
+    </section>
+
+    <section class="section">
+      <button class="close-day" id="closeDay">Cerrar día</button>
+    </section>
+  </main>
+
+  <dialog id="historyDialog">
+    <div class="modal">
+      <div class="modal-top">
+        <div class="modal-title">Historial</div>
+        <button class="modal-close" data-close="historyDialog">×</button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-period="day">Día</button>
+        <button class="tab" data-period="week">Semana</button>
+        <button class="tab" data-period="month">Mes</button>
+      </div>
+
+      <div class="history-stats" id="historyStats"></div>
+    </div>
+  </dialog>
+
+  <dialog id="closingDialog">
+    <div class="modal">
+      <div class="modal-top">
+        <div class="modal-title">Cierre del día</div>
+        <button class="modal-close" data-close="closingDialog">×</button>
+      </div>
+
+      <div class="closing-box" id="closingContent"></div>
+    </div>
+  </dialog>
+
+  <script>
+    (() => {
+      const DAILY_GOAL = 333;
+      const WEEKLY_GOAL = 2000;
+
+      const PRODUCTS = [
+        {type:"Nuevo",size:120,value:167},
+        {type:"Nuevo",size:60,value:93},
+        {type:"Nuevo",size:30,value:55},
+        {type:"Nuevo",size:16,value:31},
+        {type:"Relleno",size:120,value:133},
+        {type:"Relleno",size:60,value:66},
+        {type:"Relleno",size:30,value:31},
+        {type:"Relleno",size:16,value:16}
+      ];
+
+      const storageKey = "fraiche-oficial-sales-v1";
+      const closedKey = "fraiche-oficial-closed-v1";
+
+      let selectedDate = startOfDay(new Date());
+      let sales = loadJSON(storageKey,{});
+      let closedDays = loadJSON(closedKey,{});
+
+      const $ = id => document.getElementById(id);
+
+      function loadJSON(key,fallback){
+        try{
+          return JSON.parse(localStorage.getItem(key)) || fallback;
+        }catch{
+          return fallback;
+        }
+      }
+
+      function save(){
+        localStorage.setItem(storageKey,JSON.stringify(sales));
+        localStorage.setItem(closedKey,JSON.stringify(closedDays));
+      }
+
+      function startOfDay(d){
+        const x = new Date(d);
+        x.setHours(0,0,0,0);
+        return x;
+      }
+
+      function keyForDate(date){
+        const y=date.getFullYear();
+        const m=String(date.getMonth()+1).padStart(2,"0");
+        const d=String(date.getDate()).padStart(2,"0");
+        return `${y}-${m}-${d}`;
+      }
+
+      function dateFromKey(k){
+        const [y,m,d]=k.split("-").map(Number);
+        return new Date(y,m-1,d);
+      }
+
+      function formatMoney(n){
+        return "$"+Math.round(n).toLocaleString("es-MX");
+      }
+
+      function formatMoney2(n){
+        return "$"+Number(n).toLocaleString("es-MX",{
+          minimumFractionDigits:2,
+          maximumFractionDigits:2
+        });
+      }
+
+      function daySales(date=selectedDate){
+        return sales[keyForDate(date)] || [];
+      }
+
+      function totalForDate(date){
+        return daySales(date).reduce((a,s)=>a+s.value,0);
+      }
+
+      function isToday(date){
+        return keyForDate(date)===keyForDate(new Date());
+      }
+
+      function isSellingDay(date){
+        const d=date.getDay();
+        return d>=1 && d<=6;
+      }
+
+      function mondayOf(date){
+        const d=startOfDay(date);
+        const day=d.getDay();
+        const shift=day===0 ? -6 : 1-day;
+        d.setDate(d.getDate()+shift);
+        return d;
+      }
+
+      function weekDates(date){
+        const mon=mondayOf(date);
+        return Array.from({length:6},(_,i)=>{
+          const d=new Date(mon);
+          d.setDate(mon.getDate()+i);
+          return d;
+        });
+      }
+
+      function weekTotal(date){
+        return weekDates(date).reduce((a,d)=>a+totalForDate(d),0);
+      }
+
+      function previousWeekTotal(date){
+        const d=new Date(date);
+        d.setDate(d.getDate()-7);
+        return weekTotal(d);
+      }
+
+      function monthKeys(date){
+        const y=date.getFullYear();
+        const m=date.getMonth();
+        return Object.keys(sales).filter(k=>{
+          const d=dateFromKey(k);
+          return d.getFullYear()===y && d.getMonth()===m;
+        });
+      }
+
+      function monthTotal(date){
+        return monthKeys(date).reduce((sum,k)=>
+          sum+(sales[k]||[]).reduce((a,s)=>a+s.value,0),0
+        );
+      }
+
+      function previousMonthTotalSameDays(date){
+        const currentDay=date.getDate();
+        const prev=new Date(date.getFullYear(),date.getMonth()-1,1);
+        let total=0;
+
+        for(let i=1;i<=currentDay;i++){
+          const d=new Date(prev.getFullYear(),prev.getMonth(),i);
+          if(d.getMonth()!==prev.getMonth()) break;
+          total+=totalForDate(d);
+        }
+        return total;
+      }
+
+      function productCounts(list){
+        const map={};
+        PRODUCTS.forEach(p=>{
+          map[`${p.type}-${p.size}`]=0;
+        });
+
+        list.forEach(s=>{
+          const k=`${s.type}-${s.size}`;
+          map[k]=(map[k]||0)+1;
+        });
+
+        return map;
+      }
+
+      function topProducts(list){
+        if(!list.length) return [];
+
+        const counts=productCounts(list);
+        const max=Math.max(...Object.values(counts));
+
+        return PRODUCTS
+          .filter(p=>counts[`${p.type}-${p.size}`]===max && max>0)
+          .map(p=>({
+            ...p,
+            count:max
+          }));
+      }
+
+      function topSize(list){
+        if(!list.length) return null;
+
+        const counts={120:0,60:0,30:0,16:0};
+        list.forEach(s=>{
+          counts[s.size]=(counts[s.size]||0)+1;
+        });
+
+        const max=Math.max(...Object.values(counts));
+        const sizes=Object.keys(counts).filter(k=>counts[k]===max);
+
+        return sizes.length===1 ? `${sizes[0]}ml` : sizes.map(x=>`${x}ml`).join(" / ");
+      }
+
+      function totalsByType(list){
+        return {
+          newTotal:list.filter(s=>s.type==="Nuevo").reduce((a,s)=>a+s.value,0),
+          refillTotal:list.filter(s=>s.type==="Relleno").reduce((a,s)=>a+s.value,0),
+          newCount:list.filter(s=>s.type==="Nuevo").length,
+          refillCount:list.filter(s=>s.type==="Relleno").length
+        };
+      }
+
+      function remainingSellingDaysAfter(date){
+        const dates=weekDates(date);
+        return dates.filter(d=>d>date).length;
+      }
+
+      function currentWeekBeforeToday(date){
+        return weekDates(date)
+          .filter(d=>d<date)
+          .reduce((a,d)=>a+totalForDate(d),0);
+      }
+
+      function findProductSuggestion(amount){
+        if(amount<=0) return null;
+
+        let best=null;
+        const maxPieces=8;
+
+        function search(index,left,chosen,pieces,total){
+          if(pieces>maxPieces) return;
+
+          if(total>=amount){
+            const over=total-amount;
+            const typesUsed=Object.keys(chosen).filter(k=>chosen[k]>0).length;
+
+            const candidate={
+              chosen:{...chosen},
+              pieces,
+              total,
+              over,
+              typesUsed
+            };
+
+            if(
+              !best ||
+              pieces<best.pieces ||
+              (pieces===best.pieces && over<best.over) ||
+              (pieces===best.pieces && over===best.over && typesUsed<best.typesUsed)
+            ){
+              best=candidate;
+            }
+            return;
+          }
+
+          if(index>=PRODUCTS.length) return;
+
+          const p=PRODUCTS[index];
+          const maxCount=Math.min(
+            maxPieces-pieces,
+            Math.ceil((amount-total)/p.value)+1
+          );
+
+          for(let c=0;c<=maxCount;c++){
+            if(c>0) chosen[`${p.type}-${p.size}`]=c;
+            else delete chosen[`${p.type}-${p.size}`];
+
+            search(
+              index+1,
+              left,
+              chosen,
+              pieces+c,
+              total+(c*p.value)
+            );
+          }
+
+          delete chosen[`${p.type}-${p.size}`];
+        }
+
+        search(0,amount,{},0,0);
+        return best;
+      }
+
+      function suggestionText(amount){
+        const result=findProductSuggestion(amount);
+        if(!result) return "";
+
+        const parts=[];
+
+        PRODUCTS.forEach(p=>{
+          const n=result.chosen[`${p.type}-${p.size}`]||0;
+          if(n){
+            parts.push(`${n} ${n===1?p.type:p.type+"s"} de ${p.size}ml`);
+          }
+        });
+
+        const phrase=parts.join(" + ");
+
+        if(result.over===0){
+          return `Con ${phrase} llegas exacto.`;
+        }
+
+        return `Con ${phrase} llegas a ${formatMoney(result.total)}, ${formatMoney(result.over)} arriba.`;
+      }
+
+      function renderHeader(){
+        const opts={
+          weekday:"short",
+          day:"numeric",
+          month:"short"
+        };
+
+        $("dateLabel").textContent=
+          selectedDate.toLocaleDateString("es-MX",opts)
+            .replace(".","")
+            .replace(/^./,c=>c.toUpperCase());
+
+        $("todayLabel").textContent=isToday(selectedDate) ? "HOY" : "";
+      }
+
+      function renderHero(){
+        const total=totalForDate(selectedDate);
+        $("dailyAmount").textContent=formatMoney(total);
+
+        const remaining=Math.max(0,DAILY_GOAL-total);
+        const pill=$("remainingPill");
+
+        if(remaining===0){
+          pill.textContent="META CUMPLIDA ✓";
+          pill.classList.add("done");
+        }else{
+          pill.textContent=`FALTAN ${formatMoney(remaining)}`;
+          pill.classList.remove("done");
+        }
+
+        const pct=Math.min(1,total/DAILY_GOAL);
+        const fullHeight=218;
+        const height=fullHeight*pct;
+        const y=242-height;
+
+        const fill=$("trophyFill");
+        fill.setAttribute("y",y);
+        fill.setAttribute("height",height);
+      }
+
+      function renderSmart(){
+        const total=totalForDate(selectedDate);
+        const weekBefore=currentWeekBeforeToday(selectedDate);
+        const daysAfter=remainingSellingDaysAfter(selectedDate);
+
+        let main="";
+        let secondary="";
+
+        if(!isSellingDay(selectedDate)){
+          main="Hoy no forma parte de la meta de lunes a sábado.";
+          secondary="Puedes consultar tus resultados sin modificar el ritmo semanal.";
+        }else if(total<DAILY_GOAL){
+          const remaining=DAILY_GOAL-total;
+
+          if(remaining<=30){
+            main=`Estás a solo ${formatMoney(remaining)} de tu meta diaria.`;
+          }else{
+            main=`Te faltan ${formatMoney(remaining)} para tu meta. ${suggestionText(remaining)}`;
+          }
+
+          if(daysAfter>0){
+            const targetToday=Math.max(
+              0,
+              Math.ceil((WEEKLY_GOAL-weekBefore)/(daysAfter+1))
+            );
+
+            const stretch=Math.max(total,targetToday);
+            const after=Math.max(
+              0,
+              Math.ceil((WEEKLY_GOAL-weekBefore-stretch)/daysAfter)
+            );
+
+            secondary=
+              `Si hoy terminas en ${formatMoney(stretch)}, `+
+              `tu promedio necesario desde mañana sería de ${formatMoney(after)} por día.`;
+          }else{
+            const weeklyRemaining=Math.max(0,WEEKLY_GOAL-(weekBefore+total));
+            secondary=
+              weeklyRemaining>0
+              ? `Es el último día de la semana: faltan ${formatMoney(weeklyRemaining)} para llegar a $2,000.`
+              : "La meta semanal ya está cumplida.";
+          }
+        }else{
+          const currentWeek=weekBefore+total;
+          const weeklyRemaining=Math.max(0,WEEKLY_GOAL-currentWeek);
+
+          main="Meta diaria cumplida ✓";
+
+          if(weeklyRemaining===0){
+            secondary="También cumpliste la meta semanal. Todo lo que vendas ahora queda por encima del objetivo.";
+          }else if(daysAfter>0){
+            const avg=Math.ceil(weeklyRemaining/daysAfter);
+            secondary=
+              `Te faltan ${formatMoney(weeklyRemaining)} para la semana. `+
+              `Necesitas un promedio de ${formatMoney(avg)} durante los próximos ${daysAfter} día${daysAfter===1?"":"s"}.`;
+          }else{
+            secondary=`Te faltan ${formatMoney(weeklyRemaining)} para cerrar la semana en $2,000.`;
+          }
+        }
+
+        $("smartMain").textContent=main;
+        $("smartSecondary").textContent=secondary;
+      }
+
+      function renderSales(){
+        const list=daySales();
+        const box=$("salesList");
+        box.innerHTML="";
+
+        if(!list.length){
+          box.innerHTML='<div class="empty">Todavía no hay ventas registradas este día.</div>';
+          return;
+        }
+
+        list.forEach((sale,index)=>{
+          const row=document.createElement("div");
+          row.className="sale-row";
+
+          row.innerHTML=`
+            <div class="sale-name">${sale.type} ${sale.size}ml</div>
+            <div class="sale-value">+${formatMoney(sale.value)}</div>
+            <button class="delete-sale" aria-label="Eliminar venta" data-index="${index}">×</button>
+          `;
+
+          box.appendChild(row);
+        });
+
+        box.querySelectorAll(".delete-sale").forEach(btn=>{
+          btn.addEventListener("click",()=>{
+            const idx=Number(btn.dataset.index);
+            const k=keyForDate(selectedDate);
+            sales[k].splice(idx,1);
+
+            if(!sales[k].length) delete sales[k];
+
+            delete closedDays[k];
+            save();
+            render();
+          });
+        });
+      }
+
+      function renderSummary(){
+        const list=daySales();
+        const total=list.reduce((a,s)=>a+s.value,0);
+        const ticket=list.length ? total/list.length : 0;
+        const top=topProducts(list);
+        const split=totalsByType(list);
+
+        $("metricSales").textContent=list.length;
+        $("metricTotal").textContent=formatMoney(total);
+        $("metricTicket").textContent=list.length ? formatMoney2(ticket) : "$0";
+
+        if(!top.length){
+          $("metricTop").textContent="—";
+        }else if(top.length===1){
+          $("metricTop").textContent=`${top[0].size}ml`;
+        }else{
+          $("metricTop").textContent="Empate";
+        }
+
+        $("newSplit").textContent=
+          `${split.newCount} · ${formatMoney(split.newTotal)}`;
+
+        $("refillSplit").textContent=
+          `${split.refillCount} · ${formatMoney(split.refillTotal)}`;
+      }
+
+      function renderCountRows(type,containerId){
+        const list=daySales();
+        const counts=productCounts(list);
+        const sizes=[120,60,30,16];
+
+        const max=Math.max(
+          1,
+          ...sizes.map(size=>counts[`${type}-${size}`]||0)
+        );
+
+        const html=sizes.map(size=>{
+          const count=counts[`${type}-${size}`]||0;
+          const width=(count/max)*100;
+
+          return `
+            <div class="count-row">
+              <div>${size}ml</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width:${width}%"></div>
+              </div>
+              <strong>${count}</strong>
+            </div>
+          `;
+        }).join("");
+
+        $(containerId).innerHTML=html;
+      }
+
+      function renderCounts(){
+        renderCountRows("Nuevo","newCounts");
+        renderCountRows("Relleno","refillCounts");
+
+        const top=topProducts(daySales());
+
+        if(!top.length){
+          $("leaderText").textContent="Aún no hay un producto más vendido.";
+        }else if(top.length===1){
+          $("leaderText").textContent=
+            `Más vendido hoy: ${top[0].type} ${top[0].size}ml · ${top[0].count} unidad${top[0].count===1?"":"es"}.`;
+        }else{
+          $("leaderText").textContent=
+            "Hay empate entre: "+
+            top.map(x=>`${x.type} ${x.size}ml`).join(", ")+".";
+        }
+      }
+
+      function renderWeek(){
+        const dates=weekDates(selectedDate);
+        const values=dates.map(d=>totalForDate(d));
+        const max=Math.max(DAILY_GOAL,...values);
+        const names=["LUN","MAR","MIÉ","JUE","VIE","SÁB"];
+
+        $("weekBars").innerHTML=dates.map((d,i)=>{
+          const height=Math.max(4,Math.min(92,(values[i]/max)*92));
+
+          return `
+            <div class="day-col">
+              <div class="day-bar-area">
+                <div class="day-bar" style="height:${height}px"></div>
+              </div>
+              <div class="day-name">${names[i]}</div>
+            </div>
+          `;
+        }).join("");
+
+        const current=values.reduce((a,b)=>a+b,0);
+        const remaining=Math.max(0,WEEKLY_GOAL-current);
+
+        $("weekTotal").textContent=`${formatMoney(current)} de $2,000`;
+        $("weekRemaining").textContent=
+          remaining ? `Faltan ${formatMoney(remaining)}` : "Meta semanal cumplida ✓";
+
+        const previous=previousWeekTotal(selectedDate);
+
+        if(previous>0){
+          const pct=((current-previous)/previous)*100;
+          $("weekTrend").textContent=
+            pct>=0
+            ? `Vas ${Math.abs(pct).toFixed(0)}% arriba de la semana anterior.`
+            : `Vas ${Math.abs(pct).toFixed(0)}% abajo de la semana anterior.`;
+        }else{
+          $("weekTrend").textContent=
+            "La comparación aparecerá cuando exista una semana anterior con ventas.";
+        }
+      }
+
+      function historyData(period){
+        let list=[];
+        let total=0;
+        let previous=0;
+        let title="";
+
+        if(period==="day"){
+          list=daySales();
+          total=list.reduce((a,s)=>a+s.value,0);
+
+          const prev=new Date(selectedDate);
+          prev.setDate(prev.getDate()-7);
+          previous=totalForDate(prev);
+          title="Día seleccionado";
+        }
+
+        if(period==="week"){
+          const dates=weekDates(selectedDate);
+          list=dates.flatMap(d=>daySales(d));
+          total=list.reduce((a,s)=>a+s.value,0);
+          previous=previousWeekTotal(selectedDate);
+          title="Semana seleccionada";
+        }
+
+        if(period==="month"){
+          const keys=monthKeys(selectedDate);
+          list=keys.flatMap(k=>sales[k]||[]);
+          total=list.reduce((a,s)=>a+s.value,0);
+          previous=previousMonthTotalSameDays(selectedDate);
+          title=selectedDate.toLocaleDateString("es-MX",{
+            month:"long",
+            year:"numeric"
+          });
+        }
+
+        const split=totalsByType(list);
+        const top=topProducts(list);
+        const topLabel=top.length
+          ? top.map(x=>`${x.type} ${x.size}ml`).join(" / ")
+          : "—";
+
+        let comparison="Sin periodo anterior";
+        if(previous>0){
+          const pct=((total-previous)/previous)*100;
+          comparison=(pct>=0?"+":"")+pct.toFixed(0)+"%";
+        }
+
+        return {
+          title,
+          total,
+          sales:list.length,
+          ticket:list.length ? total/list.length : 0,
+          top:topLabel,
+          topSize:topSize(list)||"—",
+          newTotal:split.newTotal,
+          refillTotal:split.refillTotal,
+          comparison
+        };
+      }
+
+      function renderHistory(period="day"){
+        const d=historyData(period);
+
+        $("historyStats").innerHTML=`
+          <div class="history-stat">
+            <small>Periodo</small>
+            <strong>${d.title}</strong>
+          </div>
+
+          <div class="history-stat">
+            <small>Total</small>
+            <strong>${formatMoney(d.total)}</strong>
+          </div>
+
+          <div class="history-stat">
+            <small>Ventas</small>
+            <strong>${d.sales}</strong>
+          </div>
+
+          <div class="history-stat">
+            <small>Ticket promedio</small>
+            <strong>${d.sales?formatMoney2(d.ticket):"$0"}</strong>
+          </div>
+
+          <div class="history-stat">
+            <small>Producto líder</small>
+            <strong>${d.top}</strong>
+          </div>
+
+          <div class="history-stat">
+            <small>Tamaño líder</small>
+            <strong>${d.topSize}</strong>
+          </div>
+
+          <div class="history-stat">
+            <small>Nuevos</small>
+            <strong>${formatMoney(d.newTotal)}</strong>
+          </div>
+
+          <div class="history-stat">
+            <small>Rellenos</small>
+            <strong>${formatMoney(d.refillTotal)}</strong>
+          </div>
+
+          <div class="history-stat">
+            <small>Vs. periodo anterior</small>
+            <strong>${d.comparison}</strong>
+          </div>
+        `;
+      }
+
+      function renderClosing(){
+        const list=daySales();
+        const total=list.reduce((a,s)=>a+s.value,0);
+        const difference=total-DAILY_GOAL;
+        const split=totalsByType(list);
+        const top=topProducts(list);
+
+        let topText="No hubo ventas registradas.";
+        if(top.length===1){
+          topText=`Tu producto más vendido fue ${top[0].type} ${top[0].size}ml.`;
+        }else if(top.length>1){
+          topText=
+            "Tus productos más vendidos fueron "+
+            top.map(x=>`${x.type} ${x.size}ml`).join(" y ")+".";
+        }
+
+        let resultText="";
+        if(difference>0){
+          resultText=`Superaste tu meta por ${formatMoney(difference)}.`;
+        }else if(difference===0){
+          resultText="Llegaste exactamente a tu meta diaria.";
+        }else{
+          resultText=`Te faltaron ${formatMoney(Math.abs(difference))} para tu meta diaria.`;
+        }
+
+        $("closingContent").innerHTML=`
+          <div class="closing-amount">${formatMoney(total)}</div>
+
+          <div class="closing-line">
+            Hoy hiciste <strong>${list.length} venta${list.length===1?"":"s"}</strong>.
+          </div>
+
+          <div class="closing-line">${resultText}</div>
+          <div class="closing-line">${topText}</div>
+
+          <div class="closing-line">
+            Nuevos: <strong>${formatMoney(split.newTotal)}</strong><br>
+            Rellenos: <strong>${formatMoney(split.refillTotal)}</strong><br>
+            Ticket promedio:
+            <strong>${list.length?formatMoney2(total/list.length):"$0"}</strong>
+          </div>
+
+          <div class="closing-line">
+            Semana:
+            <strong>${formatMoney(weekTotal(selectedDate))} de $2,000</strong>
+          </div>
+
+          <div class="tiny-note">
+            Cerrar el día no elimina ni bloquea tus ventas.
+          </div>
+        `;
+      }
+
+      function render(){
+        renderHeader();
+        renderHero();
+        renderSmart();
+        renderSales();
+        renderSummary();
+        renderCounts();
+        renderWeek();
+      }
+
+      document.querySelectorAll(".product-btn").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+          const k=keyForDate(selectedDate);
+
+          if(!sales[k]) sales[k]=[];
+
+          sales[k].push({
+            type:btn.dataset.type,
+            size:Number(btn.dataset.size),
+            value:Number(btn.dataset.value),
+            createdAt:Date.now()
+          });
+
+          delete closedDays[k];
+          save();
+          render();
+        });
+      });
+
+      $("prevDay").addEventListener("click",()=>{
+        selectedDate.setDate(selectedDate.getDate()-1);
+        selectedDate=startOfDay(selectedDate);
+        render();
+      });
+
+      $("nextDay").addEventListener("click",()=>{
+        selectedDate.setDate(selectedDate.getDate()+1);
+        selectedDate=startOfDay(selectedDate);
+        render();
+      });
+
+      $("countToggle").addEventListener("click",()=>{
+        $("countCard").classList.toggle("open");
+        $("countArrow").textContent=
+          $("countCard").classList.contains("open") ? "⌃" : "⌄";
+      });
+
+      $("openHistory").addEventListener("click",()=>{
+        renderHistory("day");
+
+        document.querySelectorAll(".tab").forEach(t=>
+          t.classList.toggle("active",t.dataset.period==="day")
+        );
+
+        $("historyDialog").showModal();
+      });
+
+      document.querySelectorAll(".tab").forEach(tab=>{
+        tab.addEventListener("click",()=>{
+          document.querySelectorAll(".tab").forEach(t=>
+            t.classList.remove("active")
+          );
+
+          tab.classList.add("active");
+          renderHistory(tab.dataset.period);
+        });
+      });
+
+      $("closeDay").addEventListener("click",()=>{
+        const k=keyForDate(selectedDate);
+
+        closedDays[k]={
+          closedAt:Date.now()
+        };
+
+        save();
+        renderClosing();
+        $("closingDialog").showModal();
+      });
+
+      document.querySelectorAll("[data-close]").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+          $(btn.dataset.close).close();
+        });
+      });
+
+      render();
+    })();
+  </script>
+
+  <script>
+    if ("serviceWorker" in navigator){
+      window.addEventListener("load",()=>{
+        navigator.serviceWorker.register("./sw.js").catch(()=>{});
+      });
+    }
+  </script>
+</body>
+  </html>
